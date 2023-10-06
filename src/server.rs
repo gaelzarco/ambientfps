@@ -3,7 +3,11 @@ use ambient_api::{
         camera::concepts::{
             PerspectiveInfiniteReverseCamera, PerspectiveInfiniteReverseCameraOptional,
         },
-        primitives::components::quad,
+        primitives::{
+            components::{cube, quad},
+            concepts::{Capsule, Sphere, Torus},
+        },
+        rendering::components::{color, double_sided},
         transform::components::{lookat_target, translation},
     },
     prelude::*,
@@ -25,7 +29,7 @@ pub fn main() {
     .spawn();
 
     Entity::new()
-        .with(translation(), vec3(0., 0., 0.))
+        .with(translation(), vec3(2., 2., 2.))
         .with(quad(), ())
         .spawn();
 
