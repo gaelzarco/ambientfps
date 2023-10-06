@@ -22,6 +22,8 @@ To learn more about [Ambient](https://ambient.run), take a look at the following
 
 ✧ [Rust Programming Language](https://www.rust-lang.org/) ✧
 
+✧ [Ambient Book](https://ambientrun.github.io/Ambient/) ✧
+
 ✧ [Ambient Docs](https://ambient.run/docs) ✧
 
 ✧ [Ambient API](https://docs.rs/ambient_api/latest/ambient_api/) ✧
