@@ -1,0 +1,6 @@
+[package]
+id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
+name = "ambientfps"
+version = "0.0.1"
+content = { type = "Playable" }
+ambient_version = "0.3.0"
