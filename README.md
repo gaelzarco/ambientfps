@@ -4,7 +4,7 @@
 
 <img src='https://img.shields.io/badge/Rust-Rust/?logo=rust&color=black' alt='Rust'>
 
-<img src="https://img.shields.io/badge/WASM-WASM/?logo=webassembly&color=black" alt="WASM">
+<img src="https://img.shields.io/badge/Web Assembly-Web Assembly/?logo=webassembly&color=black" alt="Web Assembly">
 
 <img src='https://img.shields.io/badge/WebGPU-WebGPU/?logo=webgpu&color=black' alt= 'WebGPU'>
 
