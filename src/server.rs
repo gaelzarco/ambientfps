@@ -3,12 +3,8 @@ use ambient_api::{
         camera::concepts::{
             PerspectiveInfiniteReverseCamera, PerspectiveInfiniteReverseCameraOptional,
         },
-        primitives::{
-            components::{cube, quad},
-            concepts::{Capsule, Sphere, Torus},
-        },
-        rendering::components::{color, double_sided},
-        transform::components::{lookat_target, translation},
+        primitives::components::{cube, quad, torus},
+        transform::components::{lookat_target, translation, euler_rotation},
     },
     prelude::*,
 };
@@ -19,19 +15,19 @@ pub fn main() {
         optional: PerspectiveInfiniteReverseCameraOptional {
             aspect_ratio_from_window: Some(entity::resources()),
             main_scene: Some(()),
-            translation: Some(Vec3::ONE * 5.),
+            translation: Some(Vec3::ONE * 10.),
             ..default()
         },
         ..PerspectiveInfiniteReverseCamera::suggested()
     }
     .make()
-    .with(lookat_target(), vec3(0., 0., 0.))
+    .with(lookat_target(), vec3(2., 2., 2.))
     .spawn();
 
     Entity::new()
-        .with(translation(), vec3(2., 2., 2.))
-        .with(quad(), ())
-        .spawn();
+    .with(torus(), ())
+    .with(euler_rotation(), vec3(2., 2., 2.))
+    .spawn();
 
     println!("Hello, Ambient!");
 }
