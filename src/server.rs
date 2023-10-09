@@ -1,66 +1,32 @@
 use ambient_api::{
     core::{
-        camera::concepts::{
-            PerspectiveInfiniteReverseCamera, PerspectiveInfiniteReverseCameraOptional,
-        },
-        rendering::components::{ color, double_sided },
-        primitives::{
-            components::quad,
-            concepts::Torus
-        },
-        transform::{
-            components::lookat_target, 
-            concepts::{Transformable, TransformableOptional}
-        },
+        rendering::components::color,
+        primitives::components::quad,
+        transform::components::scale,
+        physics::components::plane_collider, model::components::model_from_url, player::components::is_player,
     },
     prelude::*,
 };
+use packages::{character_controller::components::use_character_controller, character_animation::components::basic_character_animations};
 
 #[main]
 pub fn main() {
-    PerspectiveInfiniteReverseCamera {
-        optional: PerspectiveInfiniteReverseCameraOptional {
-            aspect_ratio_from_window: Some(entity::resources()),
-            main_scene: Some(()),
-            translation: Some(Vec3::ONE * 10.),
-            ..default()
-        },
-        ..PerspectiveInfiniteReverseCamera::suggested()
-    }
-    .make()
-    .with(lookat_target(), vec3(2., 2., 2.))
-    .spawn();
-
     Entity::new()
-    .with_merge(Transformable {
-        local_to_world: Mat4::IDENTITY,
-        optional: TransformableOptional {
-            scale: Some(Vec3::ONE * 10.),
-            ..default()
+        .with(quad(), ())
+        .with(scale(), Vec3::ONE * 10.0)
+        .with(color(), vec4(1.0, 0.0, 0.0, 1.0))
+        .with(plane_collider(), ())
+        .spawn();
+
+    spawn_query(is_player()).bind(move |players| {
+        for (id, _) in players {
+            entity::add_components(
+                id,
+                    Entity::new()
+                        .with(use_character_controller(), ())
+                        .with(model_from_url(), packages::base_assets::assets::url("Y Bot.fbx"))
+                        .with(basic_character_animations(), id)
+            );
         }
-    })
-    .with(quad(), ())
-    .with(double_sided(), true)
-    .with(color(), vec4(1., 1., 1., 1.))
-    .spawn();
-
-    Entity::new()
-    .with_merge(Transformable {
-        local_to_world: Mat4::IDENTITY,
-        optional: TransformableOptional {
-            translation: Some(vec3(0.0, -0.0, 0.5)),
-            ..default()
-        } 
-    })
-    .with_merge( Torus {
-        torus: (),
-        torus_inner_radius: 0.25,
-        torus_outer_radius: 0.5,
-        torus_slices: 32,
-        torus_loops: 16
-    })
-    .with(color(), vec4(0.0, 0.0, 0.0, 0.0))
-    .spawn();
-
-    println!("Hello, Ambient!");
+    });
 }
