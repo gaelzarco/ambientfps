@@ -15,3 +15,6 @@ hide_cursor = { deployment = "2ejmKJKgh6b4pTnwWPdv4s" }
 
 [components]
 bouncy_created = { type = "Duration" }
+
+[message.Paint]
+fields = { ray_origin = "Vec3", ray_dir = "Vec3" }

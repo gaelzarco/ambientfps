@@ -23,7 +23,7 @@ use ambient_api::{
 
 use packages::{
     character_controller::components::use_character_controller,
-    character_animation::components::basic_character_animations, this::components::bouncy_created
+    character_animation::components::basic_character_animations, this::{components::bouncy_created, messages::Paint}
 };
 
 #[main]
@@ -67,6 +67,23 @@ pub fn main() {
             .with(dynamic(), true)
             .with(bouncy_created(), game_time())
             .with(remove_at_game_time(), game_time() + Duration::from_secs_f32(5.0))
+            .spawn();
+    });
+
+    Paint::subscribe(|ctx, msg| {
+        if ctx.client_user_id().is_none() {
+            return;
+        }
+
+        let Some(hit) = physics::raycast_first(msg.ray_origin, msg.ray_dir) else {
+            return;
+        };
+
+        Entity::new()
+            .with(cube(), ())
+            .with(translation(), hit.position)
+            .with(scale(), Vec3::ONE * 0.1)
+            .with(color(), vec4(0., 1., 0., 1.))
             .spawn();
     });
 
