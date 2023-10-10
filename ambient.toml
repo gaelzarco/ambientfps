@@ -3,7 +3,7 @@ id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
 name = "a_R_tutorial"
 version = "0.1.0"
 # This allows for Mods to be loaded by the game.
-# content = { type = "Mod", for_playables= ["s3yc2jedhhrrl2glypzwottdbqkj7kqy"] }
+content = { type = "Playable", example = false }
 ambient_version = "0.3.0"
 authors = ["Gael Zarco"]
 description= "An FPS game built through the Ambient engine tutorial."
