@@ -1,9 +1,0 @@
-[package]
-id = "pr5m3vitrxh3a4pqvzb6ppr2b2e4opl3"
-name = "my_mod"
-version = "0.0.1"
-content = { type = "Playable" }
-ambient_version = "0.3.0"
-
-[message.Teleport]
-fields = {}
