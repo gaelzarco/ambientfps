@@ -2,12 +2,19 @@ use ambient_api::{
     core::{
         rendering::components::color,
         primitives::{
-            components::{quad, cube},
+            components::{
+                quad, cube
+            },
             concepts::Sphere
         },
         transform::{
-            components::{scale, translation},
-            concepts::Transformable
+            components::{
+                scale, translation
+            },
+            concepts::{
+                Transformable,
+                TransformableOptional
+            }
         },
         physics::components::{
             plane_collider,
@@ -16,14 +23,20 @@ use ambient_api::{
             dynamic
         },
         model::components::model_from_url,
-        player::components::is_player, ecs::components::remove_at_game_time,
+        player::components::is_player,
+        ecs::components::remove_at_game_time,
+        prefab::components::prefab_from_url,
     },
     prelude::*,
 };
 
 use packages::{
     character_controller::components::use_character_controller,
-    character_animation::components::basic_character_animations, this::{components::bouncy_created, messages::Paint}
+    character_animation::components::basic_character_animations,
+    this::{
+        components::bouncy_created,
+        messages::Paint
+    }
 };
 
 #[main]
@@ -86,6 +99,17 @@ pub fn main() {
             .with(color(), vec4(0., 1., 0., 1.))
             .spawn();
     });
+
+    Entity::new()
+        .with_merge(Transformable {
+            local_to_world: Default::default(),
+            optional:  TransformableOptional {
+                scale: Some(Vec3::ONE * 0.3),
+                ..Default::default()
+            }
+        })
+        .with(model_from_url(), packages::this::assets::url("AntiqueCamera.glb"))
+        .spawn();
 
     // THIS IS HOW remove_at_game_time() works under the hood
     // query(bouncy_created()).each_frame(|entities| {
