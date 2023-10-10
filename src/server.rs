@@ -24,8 +24,7 @@ use ambient_api::{
         },
         model::components::model_from_url,
         player::components::is_player,
-        ecs::components::remove_at_game_time,
-        prefab::components::prefab_from_url,
+        ecs::components::remove_at_game_time
     },
     prelude::*,
 };
