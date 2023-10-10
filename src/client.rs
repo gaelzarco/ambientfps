@@ -13,8 +13,6 @@ fn PlayerPosition(hooks: &mut Hooks) -> Element {
 
 #[main]
 pub fn main() {
-  PlayerPosition.el().spawn_interactive();
-
   fixed_rate_tick(Duration::from_millis(20), move |_| {
     let Some(camera_id) = camera::get_active() else {
       return;
@@ -31,4 +29,6 @@ pub fn main() {
       .send_server_unreliable();
     }
   });
+
+  PlayerPosition.el().spawn_interactive();
 }

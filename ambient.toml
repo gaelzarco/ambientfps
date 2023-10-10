@@ -2,12 +2,15 @@
 id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
 name = "ambientfps"
 version = "0.0.1"
-content = { type = "Playable" }
+# This allows for Mods to be loaded by the game.
+content = { type = "Mod", for_playables= ["s3yc2jedhhrrl2glypzwottdbqkj7kqy"] }
 ambient_version = "0.3.0"
 authors = ["Gael Zarco"]
 description= "An FPS game built through the Ambient engine tutorial."
 
 [dependencies]
+my_game = { deployment = "s3yc2jedhhrrl2glypzwottdbqkj7kqy/deployment/5AdndA2PgCD2rcUOxfnAaa" }
+package_manager = { deployment = "4hEHArTmKMprisqnQPNxLK" }
 base_assets = { deployment = "79plwEq1A0N3t0ExBOMTPM" }
 character_controller = { deployment = "yV6nlkxj25cmkBhd4koe8" }
 character_animation = { deployment = "4nLmHfcAlZkvWbK0NANMoC" }

@@ -1,0 +1,23 @@
+[package]
+name = "my_mod"
+
+edition = "2021"
+publish = false
+version = "0.0.1"
+
+[dependencies]
+ambient_api = { git = "https://github.com/AmbientRun/Ambient.git", tag = "v0.3.0" }
+
+[[bin]]
+name = "my_mod_client"
+path = "src/client.rs"
+required-features = ["client"]
+
+[[bin]]
+name = "my_mod_server"
+path = "src/server.rs"
+required-features = ["server"]
+
+[features]
+client = ["ambient_api/client"]
+server = ["ambient_api/server"]

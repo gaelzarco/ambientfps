@@ -32,6 +32,7 @@ use ambient_api::{
 use packages::{
     character_controller::components::use_character_controller,
     character_animation::components::basic_character_animations,
+    package_manager,
     this::{
         components::bouncy_created,
         messages::Paint
@@ -40,6 +41,12 @@ use packages::{
 
 #[main]
 pub fn main() {
+    entity::add_component(
+        package_manager::entity(),
+        package_manager::components::mod_manager_for(),
+        packages::this::entity()
+    );
+
     // Plane
     Entity::new()
         .with(quad(), ())
@@ -47,8 +54,6 @@ pub fn main() {
         .with(color(), vec4(1.0, 0.0, 0.0, 1.0))
         .with(plane_collider(), ())
         .spawn();
-
-    // Spawn Query
     spawn_query(is_player()).bind(move |players| {
         for (id, _) in players {
             entity::add_components(
