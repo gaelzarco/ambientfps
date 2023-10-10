@@ -1,13 +1,15 @@
 [package]
 id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
-name = "ambientfps"
-version = "0.0.1"
-content = { type = "Playable" }
+name = "a_R_tutorial"
+version = "0.1.0"
+# This allows for Mods to be loaded by the game.
+content = { type = "Playable", example = false }
 ambient_version = "0.3.0"
 authors = ["Gael Zarco"]
 description= "An FPS game built through the Ambient engine tutorial."
 
 [dependencies]
+package_manager = { deployment = "4hEHArTmKMprisqnQPNxLK" }
 base_assets = { deployment = "79plwEq1A0N3t0ExBOMTPM" }
 character_controller = { deployment = "yV6nlkxj25cmkBhd4koe8" }
 character_animation = { deployment = "4nLmHfcAlZkvWbK0NANMoC" }
