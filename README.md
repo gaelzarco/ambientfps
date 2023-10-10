@@ -15,10 +15,10 @@
 
 #### Supercharged using Ambient game engine and features Web Assemply and WebGPU.
 
-This is a simple FPS game designed tp get my hands dirty with Rust. I am familiar with building very simple Rust CLI applications and decided to dive head-first into this challenge.
+This is a simple FPS game designed to become familiar with Rust. I read through the Rust Programming Language book and decided to dive head-first into this challenge.
 
 ## Learn More
-To learn more about [Ambient](https://ambient.run), take a look at the following resources:
+To learn more about [Ambient](https://ambient.run/), take a look at the following resources:
 
 ✧ [Rust Programming Language](https://www.rust-lang.org/) ✧
 
@@ -32,6 +32,6 @@ To learn more about [Ambient](https://ambient.run), take a look at the following
 
 ✧ [Web GPU (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API/) ✧
 
-You can check out the [Ambient Games Section](https://ambient.run/games) to see other projects.
+You can also check out the [Ambient Games Section](https://ambient.run/games) to see other projects.
 
 </div>
