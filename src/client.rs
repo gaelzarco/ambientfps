@@ -1,8 +1,20 @@
-use ambient_api::prelude::*;
+use ambient_api::{
+  element::use_entity_component,
+  core::transform::components::translation,
+  prelude::*
+};
 use packages::this::messages::Paint;
+
+#[element_component]
+fn PlayerPosition(hooks: &mut Hooks) -> Element {
+  let pos = use_entity_component(hooks, player::get_local(), translation());
+  Text::el(format!("Player Position: {:?}", pos.unwrap_or_default()))
+}
 
 #[main]
 pub fn main() {
+  PlayerPosition.el().spawn_interactive();
+
   fixed_rate_tick(Duration::from_millis(20), move |_| {
     let Some(camera_id) = camera::get_active() else {
       return;
