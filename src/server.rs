@@ -5,55 +5,51 @@ use ambient_api::{
             components::{
                 quad, cube
             },
-            concepts::Sphere
+            // concepts::Sphere
         },
         transform::{
             components::{
                 scale, translation
             },
-            concepts::{
-                Transformable,
-                TransformableOptional
-            }
+            // concepts::{
+                // Transformable,
+                // TransformableOptional
+            // }
         },
         physics::components::{
             plane_collider,
             cube_collider,
-            sphere_collider,
-            dynamic
+            // sphere_collider,
+            visualize_collider
         },
         model::components::model_from_url,
         player::components::is_player,
-        ecs::components::remove_at_game_time
+        // ecs::components::remove_at_game_time
     },
     prelude::*,
 };
 
 use packages::{
-    character_controller::components::use_character_controller,
+    character_controller::components::{use_character_controller, camera_distance},
     character_animation::components::basic_character_animations,
-    package_manager,
+    // package_manager,
     this::{
-        components::bouncy_created,
+        // components::bouncy_created,
         messages::Paint
     }
 };
 
 #[main]
 pub fn main() {
-    entity::add_component(
-        package_manager::entity(),
-        package_manager::components::mod_manager_for(),
-        packages::this::entity()
-    );
-
     // Plane
     Entity::new()
         .with(quad(), ())
-        .with(scale(), Vec3::ONE * 10.0)
-        .with(color(), vec4(1.0, 0.0, 0.0, 1.0))
+        .with(scale(), Vec3::ONE * 100.0)
+        .with(color(), vec4(0.0, 0.0, 0.0, 0.5))
         .with(plane_collider(), ())
         .spawn();
+
+    // Player
     spawn_query(is_player()).bind(move |players| {
         for (id, _) in players {
             entity::add_components(
@@ -62,31 +58,26 @@ pub fn main() {
                         .with(use_character_controller(), ())
                         .with(model_from_url(), packages::base_assets::assets::url("Y Bot.fbx"))
                         .with(basic_character_animations(), id)
+                        .with(camera_distance(), -0.1)
             );
         }
     });
 
-    for _ in 0..30 {
+
+    // Obstacles
+    for _ in 0..100 {
+        let rand_size = random::<Vec3>()*thread_rng().gen_range(6.5..10.0);
+
         Entity::new()
             .with(cube(), ())
+            .with(scale(), rand_size)
             .with(cube_collider(), Vec3::ONE)
-            .with(translation(), (random::<Vec2>()* 10.0 - 10.0).extend(1.))
+            .with(visualize_collider(), ())
+            .with(translation(), (random::<Vec2>()*thread_rng().gen_range(-100.0..100.0)).extend(0.5))
             .spawn();
     }
 
-    fixed_rate_tick(Duration::from_secs_f32(0.5), |_| {
-        Entity::new()
-            .with_merge(Sphere::suggested())
-            .with_merge(Transformable::suggested())
-            .with(scale(), Vec3::ONE * 0.2)
-            .with(translation(), Vec3::X * 10. + (random::<Vec2>() * 2.0 - 1.0).extend(10.))
-            .with(sphere_collider(), 0.5)
-            .with(dynamic(), true)
-            .with(bouncy_created(), game_time())
-            .with(remove_at_game_time(), game_time() + Duration::from_secs_f32(5.0))
-            .spawn();
-    });
-
+    // Hitscan
     Paint::subscribe(|ctx, msg| {
         if ctx.client_user_id().is_none() {
             return;
@@ -103,24 +94,4 @@ pub fn main() {
             .with(color(), vec4(0., 1., 0., 1.))
             .spawn();
     });
-
-    Entity::new()
-        .with_merge(Transformable {
-            local_to_world: Default::default(),
-            optional:  TransformableOptional {
-                scale: Some(Vec3::ONE * 0.3),
-                ..Default::default()
-            }
-        })
-        .with(model_from_url(), packages::this::assets::url("AntiqueCamera.glb"))
-        .spawn();
-
-    // THIS IS HOW remove_at_game_time() works under the hood
-    // query(bouncy_created()).each_frame(|entities| {
-    //     for (id, created) in entities {
-    //         if (game_time() - created).as_secs_f32() > 5.0 {
-    //             entity::despawn(id);
-    //         }
-    //     }
-    // });
 }

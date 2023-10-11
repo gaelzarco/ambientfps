@@ -3,8 +3,5 @@
   "rust-analyzer.cargo.features": [
     "client",
     "server"
-  ],
-  "rust-analyzer.linkedProjects": [
-    ".\\my_mod\\Cargo.toml"
   ]
 }

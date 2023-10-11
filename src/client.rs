@@ -19,7 +19,7 @@ pub fn main() {
     };
 
     let input = input::get();
-    if input.keys.contains(&KeyCode::Q) {
+    if input.mouse_buttons.contains(&MouseButton::Left) {
       let ray = camera::clip_position_to_world_ray(camera_id, Vec2::ZERO);
 
       Paint {
