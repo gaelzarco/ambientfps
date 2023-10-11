@@ -14,7 +14,7 @@
 
 #### My introduction into building web applications with Rust.
 
-#### Supercharged using Ambient game engine and powered by Web Assemply and WebGPU.
+#### Supercharged with Ambient and powered by Web Assemply and WebGPU.
 
 This is a simple FPS game designed to become familiar with Rust. I read through the Rust Programming Language book and decided to dive head-first into this challenge.
 
