@@ -18,7 +18,7 @@
 
 This is a simple FPS game designed to become familiar with Rust. I read through the Rust Programming Language book and decided to dive head-first into this challenge.
 
-[<img src='https://img.shields.io/badge/PL✧Y-PL✧Y/?logo=_&color=white&style=for-the-badge' alt='PLAY'>](https://ambient.run/packages/s3yc2jedhhrrl2glypzwottdbqkj7kqy/)
+#### [<img src='https://img.shields.io/badge/PL✧Y-PL✧Y/?logo=_&color=white&style=for-the-badge' alt='PLAY'>](https://ambient.run/packages/s3yc2jedhhrrl2glypzwottdbqkj7kqy/)
 
 ## Learn More
 
