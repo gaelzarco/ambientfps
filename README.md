@@ -14,7 +14,7 @@
 
 #### My introduction into building web applications with Rust.
 
-#### Supercharged using Ambient game engine and features Web Assemply and WebGPU.
+#### Supercharged using Ambient game engine and powered by Web Assemply and WebGPU.
 
 This is a simple FPS game designed to become familiar with Rust. I read through the Rust Programming Language book and decided to dive head-first into this challenge.
 
@@ -24,26 +24,18 @@ This is a simple FPS game designed to become familiar with Rust. I read through 
 
 To learn more about [Ambient](https://ambient.run/), take a look at the following resources:
 
+#### ✧ [Rust Programming Language](https://www.rust-lang.org/) ✧
 
-✧ [Rust Programming Language](https://www.rust-lang.org/) ✧
+#### ✧ [Ambient Book](https://ambientrun.github.io/Ambient/) ✧
 
+#### ✧ [Ambient Docs](https://ambient.run/docs) ✧
 
-✧ [Ambient Book](https://ambientrun.github.io/Ambient/) ✧
+#### ✧ [Ambient API](https://docs.rs/ambient_api/latest/ambient_api/) ✧
 
+#### ✧ [Web GPU (webgpu.rocks)](https://webgpu.rocks/) ✧
 
-✧ [Ambient Docs](https://ambient.run/docs) ✧
-
-
-✧ [Ambient API](https://docs.rs/ambient_api/latest/ambient_api/) ✧
-
-
-✧ [Web GPU (webgpu.rocks)](https://webgpu.rocks/) ✧
-
-
-✧ [Web GPU (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API/) ✧
-
+#### ✧ [Web GPU (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API/) ✧
 
 You can also check out the [Ambient Games Section](https://ambient.run/games) to see other projects.
-
 
 </div>
