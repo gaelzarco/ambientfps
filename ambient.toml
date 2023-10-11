@@ -1,7 +1,7 @@
 [package]
 id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
-name = "a_R_tutorial"
-version = "0.1.0"
+name = "AxFPS"
+version = "0.2.0"
 content = { type = "Playable", example = false }
 ambient_version = "0.3.0"
 authors = ["Gael Zarco"]
