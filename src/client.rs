@@ -11,6 +11,11 @@ fn PlayerPosition(hooks: &mut Hooks) -> Element {
   Text::el(format!("Player Position: {:?}", pos.unwrap_or_default()))
 }
 
+// #[element_component]
+// fn CenterCrosshair(_hooks: &mut Hooks) -> Element {
+//   entity::set_component(player, align_horizontal(), Align::Center)
+// }
+
 #[main]
 pub fn main() {
   fixed_rate_tick(Duration::from_millis(20), move |_| {
@@ -31,4 +36,5 @@ pub fn main() {
   });
 
   PlayerPosition.el().spawn_interactive();
+  // CenterCrosshair.el().spawn_interactive();
 }
