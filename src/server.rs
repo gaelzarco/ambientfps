@@ -1,42 +1,30 @@
 use ambient_api::{
     core::{
         rendering::components::color,
-        primitives::{
-            components::{
-                quad, cube
-            },
-            // concepts::Sphere
+        primitives::components::{
+            quad, cube
         },
-        transform::{
-            components::{
-                scale, translation
-            },
-            // concepts::{
-                // Transformable,
-                // TransformableOptional
-            // }
+        transform::components::{
+            scale, translation
         },
         physics::components::{
             plane_collider,
             cube_collider,
-            // sphere_collider,
             visualize_collider
         },
         model::components::model_from_url,
-        player::components::is_player,
-        // ecs::components::remove_at_game_time
+        player::components::is_player
     },
-    prelude::*,
+    prelude::*
 };
 
 use packages::{
-    character_controller::components::{use_character_controller, camera_distance},
+    character_controller::components::{
+        use_character_controller,
+        camera_distance
+    },
     character_animation::components::basic_character_animations,
-    // package_manager,
-    this::{
-        // components::bouncy_created,
-        messages::Paint
-    }
+    this::messages::Paint
 };
 
 #[main]
@@ -58,11 +46,10 @@ pub fn main() {
                         .with(use_character_controller(), ())
                         .with(model_from_url(), packages::base_assets::assets::url("Y Bot.fbx"))
                         .with(basic_character_animations(), id)
-                        .with(camera_distance(), -0.1)
+                        .with(camera_distance(), -0.4)
             );
         }
     });
-
 
     // Obstacles
     for _ in 0..100 {
