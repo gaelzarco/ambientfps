@@ -14,22 +14,22 @@ use packages::this::components::player_health;
 // https://github.com/AmbientRun/afps/blob/main/core/fpsui/src/client.rs
 #[element_component]
 fn Crosshair(hooks: &mut Hooks) -> Element {
-    let size = use_window_logical_resolution(hooks);
-    let center_x = size.x as f32 / 2.;
-    let center_y = size.y as f32 / 2.;
+  let size = use_window_logical_resolution(hooks);
+  let center_x = size.x as f32 / 2.;
+  let center_y = size.y as f32 / 2.;
 
-    Group::el([
-        Line.el()
-            .with(line_from(), vec3(center_x - 5., center_y - 5., 0.))
-            .with(line_to(), vec3(center_x + 5., center_y + 5., 0.))
-            .with(line_width(), 2.)
-            .with(background_color(), vec4(1., 1., 1., 1.)),
-        Line.el()
-            .with(line_from(), vec3(center_x + 5., center_y - 5., 0.))
-            .with(line_to(), vec3(center_x - 5., center_y + 5., 0.))
-            .with(line_width(), 2.)
-            .with(background_color(), vec4(1., 1., 1., 1.)),
-    ])
+  Group::el([
+      Line.el()
+        .with(line_from(), vec3(center_x - 5., center_y - 5., 0.))
+        .with(line_to(), vec3(center_x + 5., center_y + 5., 0.))
+        .with(line_width(), 2.)
+        .with(background_color(), vec4(1., 1., 1., 1.)),
+      Line.el()
+        .with(line_from(), vec3(center_x + 5., center_y - 5., 0.))
+        .with(line_to(), vec3(center_x - 5., center_y + 5., 0.))
+        .with(line_width(), 2.)
+        .with(background_color(), vec4(1., 1., 1., 1.)),
+  ])
 }
 
 #[element_component]
@@ -37,8 +37,8 @@ fn Hud(hooks: &mut Hooks) -> Element {
   let local_health = use_entity_component(hooks, player::get_local(), player_health());
 
   WindowSized::el([Dock::el([Text::el(format!(
-      "health: {:?}",
-      local_health.unwrap_or(100)
+    "health: {:?}",
+    local_health.unwrap_or(100)
   ))
   // .header_style()
   .with(docking(), Docking::Bottom)
