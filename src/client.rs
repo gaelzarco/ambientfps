@@ -18,13 +18,13 @@ fn Crosshair(hooks: &mut Hooks) -> Element {
 
     Group::el([
         Line.el()
-            .with(line_from(), vec3(center_x - 10., center_y, 0.))
-            .with(line_to(), vec3(center_x + 10., center_y, 0.))
+            .with(line_from(), vec3(center_x - 5., center_y - 5., 0.))
+            .with(line_to(), vec3(center_x + 5., center_y + 5., 0.))
             .with(line_width(), 2.)
             .with(background_color(), vec4(1., 1., 1., 1.)),
         Line.el()
-            .with(line_from(), vec3(center_x, center_y - 10., 0.))
-            .with(line_to(), vec3(center_x, center_y + 10., 0.))
+            .with(line_from(), vec3(center_x + 5., center_y - 5., 0.))
+            .with(line_to(), vec3(center_x - 5., center_y + 5., 0.))
             .with(line_width(), 2.)
             .with(background_color(), vec4(1., 1., 1., 1.)),
     ])
