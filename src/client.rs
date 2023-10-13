@@ -1,7 +1,14 @@
 use ambient_api::{
   element::use_entity_component,
-  core::transform::components::translation,
-  prelude::*
+  core::{
+    transform::components::translation,
+    rect::components::{
+      line_from, line_to,
+      line_width,
+      background_color
+    }
+  },
+  prelude::*, ui::use_window_logical_resolution
 };
 use packages::this::messages::Paint;
 
@@ -11,10 +18,27 @@ fn PlayerPosition(hooks: &mut Hooks) -> Element {
   Text::el(format!("Player Position: {:?}", pos.unwrap_or_default()))
 }
 
-// #[element_component]
-// fn CenterCrosshair(_hooks: &mut Hooks) -> Element {
-//   entity::set_component(player, align_horizontal(), Align::Center)
-// }
+// Crosshair from Ambient FPS repo:
+// https://github.com/AmbientRun/afps/blob/main/core/fpsui/src/client.rs
+#[element_component]
+fn Crosshair(hooks: &mut Hooks) -> Element {
+    let size = use_window_logical_resolution(hooks);
+    let center_x = size.x as f32 / 2.;
+    let center_y = size.y as f32 / 2.;
+
+    Group::el([
+        Line.el()
+            .with(line_from(), vec3(center_x - 10., center_y, 0.))
+            .with(line_to(), vec3(center_x + 10., center_y, 0.))
+            .with(line_width(), 2.)
+            .with(background_color(), vec4(1., 1., 1., 1.)),
+        Line.el()
+            .with(line_from(), vec3(center_x, center_y - 10., 0.))
+            .with(line_to(), vec3(center_x, center_y + 10., 0.))
+            .with(line_width(), 2.)
+            .with(background_color(), vec4(1., 1., 1., 1.)),
+    ])
+}
 
 #[main]
 pub fn main() {
@@ -36,5 +60,5 @@ pub fn main() {
   });
 
   PlayerPosition.el().spawn_interactive();
-  // CenterCrosshair.el().spawn_interactive();
+  Crosshair.el().spawn_interactive();
 }
