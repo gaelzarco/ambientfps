@@ -1,22 +1,12 @@
 use ambient_api::{
-  element::use_entity_component,
-  core::{
-    transform::components::translation,
-    rect::components::{
-      line_from, line_to,
-      line_width,
-      background_color
-    }
+  core::rect::components::{
+    line_from, line_to,
+    line_width,
+    background_color
   },
   prelude::*, ui::use_window_logical_resolution
 };
 use packages::this::messages::Paint;
-
-#[element_component]
-fn PlayerPosition(hooks: &mut Hooks) -> Element {
-  let pos = use_entity_component(hooks, player::get_local(), translation());
-  Text::el(format!("Player Position: {:?}", pos.unwrap_or_default()))
-}
 
 // Crosshair from Ambient FPS repo:
 // https://github.com/AmbientRun/afps/blob/main/core/fpsui/src/client.rs
@@ -59,6 +49,5 @@ pub fn main() {
     }
   });
 
-  PlayerPosition.el().spawn_interactive();
   Crosshair.el().spawn_interactive();
 }
