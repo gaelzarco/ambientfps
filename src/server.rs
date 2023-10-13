@@ -24,7 +24,10 @@ use packages::{
         camera_distance
     },
     character_animation::components::basic_character_animations,
-    this::messages::Paint,
+    this::messages::{
+        Paint,
+        Zoom
+    }
     // this::components::player_health
 };
 
@@ -81,5 +84,17 @@ pub fn main() {
             .with(scale(), Vec3::ONE * 0.1)
             .with(color(), vec4(0., 1., 0., 1.))
             .spawn();
+    });
+
+    Zoom::subscribe(|ctx, msg| {
+        if ctx.client_user_id().is_none() || ctx.client_entity_id().is_none() {
+            return;
+        }
+
+        entity::set_component(
+            ctx.client_entity_id().unwrap(),
+            camera_distance(),
+            msg.zoom_distance
+        )
     });
 }

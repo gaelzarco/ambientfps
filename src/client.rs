@@ -4,10 +4,14 @@ use ambient_api::{
     line_width,
     background_color
   },
-  prelude::*, ui::use_window_logical_resolution,
-  element::use_entity_component
+  ui::use_window_logical_resolution,
+  element::use_entity_component,
+  prelude::*
 };
-use packages::this::messages::Paint;
+use packages::this::messages::{
+  Paint,
+  Zoom
+};
 use packages::this::components::player_health;
 
 // Crosshair from Ambient FPS repo:
@@ -60,6 +64,18 @@ pub fn main() {
       Paint {
         ray_origin: ray.origin,
         ray_dir: ray.dir
+      }
+      .send_server_unreliable();
+    }
+
+    if input.mouse_buttons.contains(&MouseButton::Right) {
+      Zoom {
+        zoom_distance: -0.7
+      }
+      .send_server_unreliable();
+    } else {
+      Zoom {
+        zoom_distance: -0.4
       }
       .send_server_unreliable();
     }

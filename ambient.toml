@@ -20,3 +20,6 @@ player_health = { type = "I32" }
 
 [message.Paint]
 fields = { ray_origin = "Vec3", ray_dir = "Vec3" }
+
+[message.Zoom]
+fields = { zoom_distance = "F32" }
