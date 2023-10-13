@@ -4,9 +4,11 @@ use ambient_api::{
     line_width,
     background_color
   },
-  prelude::*, ui::use_window_logical_resolution
+  prelude::*, ui::use_window_logical_resolution,
+  element::use_entity_component
 };
 use packages::this::messages::Paint;
+use packages::this::components::player_health;
 
 // Crosshair from Ambient FPS repo:
 // https://github.com/AmbientRun/afps/blob/main/core/fpsui/src/client.rs
@@ -30,6 +32,20 @@ fn Crosshair(hooks: &mut Hooks) -> Element {
     ])
 }
 
+#[element_component]
+fn Hud(hooks: &mut Hooks) -> Element {
+  let local_health = use_entity_component(hooks, player::get_local(), player_health());
+
+  WindowSized::el([Dock::el([Text::el(format!(
+      "health: {:?}",
+      local_health.unwrap_or(100)
+  ))
+  // .header_style()
+  .with(docking(), Docking::Bottom)
+  .with_margin_even(10.)])])
+  .with_padding_even(20.)
+}
+
 #[main]
 pub fn main() {
   fixed_rate_tick(Duration::from_millis(20), move |_| {
@@ -50,4 +66,5 @@ pub fn main() {
   });
 
   Crosshair.el().spawn_interactive();
+  Hud.el().spawn_interactive();
 }
