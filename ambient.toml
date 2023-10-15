@@ -1,7 +1,7 @@
 [package]
 id = "s3yc2jedhhrrl2glypzwottdbqkj7kqy"
 name = "AxFPS"
-version = "0.2.0"
+version = "0.2.5"
 content = { type = "Playable", example = false }
 ambient_version = "0.3.0"
 authors = ["Gael Zarco"]
@@ -16,7 +16,10 @@ hide_cursor = { deployment = "2ejmKJKgh6b4pTnwWPdv4s" }
 performance_bar = { deployment = "Vd3QAwO2rrX55H9m2MeGl" }
 
 [components]
-bouncy_created = { type = "Duration" }
+player_health = { type = "I32" }
 
 [message.Paint]
 fields = { ray_origin = "Vec3", ray_dir = "Vec3" }
+
+[message.Zoom]
+fields = { zoom_distance = "F32" }
