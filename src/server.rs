@@ -2,7 +2,7 @@ use ambient_api::{
     core::{
         rendering::components::color,
         primitives::components::{
-            quad, cube, torus
+            quad, cube
         },
         transform::components::{
             scale, translation
@@ -13,7 +13,7 @@ use ambient_api::{
             visualize_collider
         },
         model::components::model_from_url,
-        player::components::{is_player, user_id}
+        player::components::is_player
     },
     prelude::*
 };
@@ -29,7 +29,7 @@ use packages::{
         Zoom
     },
     // this::components::player_health
-    this::components::player_ammo
+    // this::components::player_ammo
 };
 
 #[main]
