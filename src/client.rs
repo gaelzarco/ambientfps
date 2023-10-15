@@ -1,9 +1,9 @@
 use ambient_api::{
-  core::rect::components::{
+  core::{rect::components::{
     line_from, line_to,
     line_width,
     background_color
-  },
+  }, transform::components::translation},
   ui::use_window_logical_resolution,
   element::use_entity_component,
   prelude::*
@@ -12,7 +12,10 @@ use packages::this::messages::{
   Paint,
   Zoom
 };
-use packages::this::components::player_health;
+use packages::this::components::{
+  player_health,
+  player_ammo
+};
 
 // Crosshair from Ambient FPS repo:
 // https://github.com/AmbientRun/afps/blob/main/core/fpsui/src/client.rs
@@ -39,14 +42,24 @@ fn Crosshair(hooks: &mut Hooks) -> Element {
 #[element_component]
 fn Hud(hooks: &mut Hooks) -> Element {
   let local_health = use_entity_component(hooks, player::get_local(), player_health());
+  let local_ammo = use_entity_component(hooks, player::get_local(), player_ammo());
 
-  WindowSized::el([Dock::el([Text::el(format!(
+  WindowSized::el([Dock::el([
+    Text::el(format!(
     "health: {:?}",
     local_health.unwrap_or(100)
-  ))
-  // .header_style()
-  .with(docking(), Docking::Bottom)
-  .with_margin_even(10.)])])
+    ))
+    .with(docking(), Docking::Bottom)
+    .with_margin_even(10.),
+    
+    Text::el(format!(
+      "ammo: {:?}",
+      local_ammo.unwrap_or(60)
+    ))
+    .with(docking(), Docking::Right)
+    .with_margin_even(10.)
+  ]
+)])
   .with_padding_even(20.)
 }
 
@@ -63,14 +76,15 @@ pub fn main() {
 
       Paint {
         ray_origin: ray.origin,
-        ray_dir: ray.dir
+        ray_dir: ray.dir,
+        ammo_used: 1
       }
       .send_server_unreliable();
     }
 
     if input.mouse_buttons.contains(&MouseButton::Right) {
       Zoom {
-        zoom_distance: -0.7
+        zoom_distance: -1.1
       }
       .send_server_unreliable();
     } else {

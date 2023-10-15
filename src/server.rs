@@ -2,7 +2,7 @@ use ambient_api::{
     core::{
         rendering::components::color,
         primitives::components::{
-            quad, cube
+            quad, cube, torus
         },
         transform::components::{
             scale, translation
@@ -13,7 +13,7 @@ use ambient_api::{
             visualize_collider
         },
         model::components::model_from_url,
-        player::components::is_player
+        player::components::{is_player, user_id}
     },
     prelude::*
 };
@@ -23,12 +23,13 @@ use packages::{
         use_character_controller,
         camera_distance
     },
-    character_animation::components::basic_character_animations,
+    character_animation::components::{basic_character_animations, use_rifle_animations},
     this::messages::{
         Paint,
         Zoom
-    }
+    },
     // this::components::player_health
+    this::components::player_ammo
 };
 
 #[main]
@@ -48,6 +49,7 @@ pub fn main() {
                 id,
                     Entity::new()
                         .with(use_character_controller(), ())
+                        .with(use_rifle_animations(), ())
                         .with(model_from_url(), packages::base_assets::assets::url("Y Bot.fbx"))
                         .with(basic_character_animations(), id)
                         .with(camera_distance(), -0.4)
