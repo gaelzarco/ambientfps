@@ -17,9 +17,10 @@ performance_bar = { deployment = "Vd3QAwO2rrX55H9m2MeGl" }
 
 [components]
 player_health = { type = "I32" }
+player_ammo = { type = "I32" }
 
 [message.Paint]
-fields = { ray_origin = "Vec3", ray_dir = "Vec3" }
+fields = { ray_origin = "Vec3", ray_dir = "Vec3", ammo_used = "I32" }
 
 [message.Zoom]
 fields = { zoom_distance = "F32" }
