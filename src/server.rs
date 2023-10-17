@@ -4,14 +4,10 @@ use ambient_api::{
         primitives::components::{
             quad, cube
         },
-        transform::components::{
+        transform::{components::{
             scale, translation
-        },
-        physics::components::{
-            plane_collider,
-            cube_collider,
-            visualize_collider
-        },
+        }, concepts::{TransformableOptional, Transformable}},
+        physics::components::plane_collider,
         model::components::model_from_url,
         player::components::is_player
     },
@@ -42,6 +38,17 @@ pub fn main() {
         .with(plane_collider(), ())
         .spawn();
 
+    Entity::new()
+        .with_merge(Transformable {
+            local_to_world: Default::default(),
+            optional: TransformableOptional {
+                scale: Some(Vec3::ONE * 50.),
+                ..Default::default()
+            }
+        })
+        .with(model_from_url(), packages::this::assets::url("landscape.glb"))
+        .spawn();
+
     // Player
     spawn_query(is_player()).bind(move |players| {
         for (id, _) in players {
@@ -58,17 +65,17 @@ pub fn main() {
     });
 
     // Obstacles
-    for _ in 0..100 {
-        let rand_size = random::<Vec3>()*thread_rng().gen_range(6.5..10.0);
+    // for _ in 0..100 {
+    //     let rand_size = random::<Vec3>()*thread_rng().gen_range(6.5..10.0);
 
-        Entity::new()
-            .with(cube(), ())
-            .with(scale(), rand_size)
-            .with(cube_collider(), Vec3::ONE)
-            .with(visualize_collider(), ())
-            .with(translation(), (random::<Vec2>()*thread_rng().gen_range(-100.0..100.0)).extend(0.5))
-            .spawn();
-    }
+    //     Entity::new()
+    //         .with(cube(), ())
+    //         .with(scale(), rand_size)
+    //         .with(cube_collider(), Vec3::ONE)
+    //         .with(visualize_collider(), ())
+    //         .with(translation(), (random::<Vec2>()*thread_rng().gen_range(-100.0..100.0)).extend(0.5))
+    //         .spawn();
+    // }
 
     // Hitscan
     Paint::subscribe(|ctx, msg| {
