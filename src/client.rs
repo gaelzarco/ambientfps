@@ -1,9 +1,9 @@
 use ambient_api::{
-  core::{rect::components::{
+  core::rect::components::{
     line_from, line_to,
     line_width,
     background_color
-  }, transform::components::translation},
+  },
   ui::use_window_logical_resolution,
   element::use_entity_component,
   prelude::*
