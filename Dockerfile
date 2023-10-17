@@ -9,5 +9,5 @@ RUN apt-get update && \
     libfontconfig1-dev clang libasound2-dev ninja-build \
     libxcb-xfixes0-dev mesa-vulkan-drivers
 
-RUN apt-get install -y libssl
+RUN apt-get install -y libssl-dev
 RUN apt-get update
